@@ -4,13 +4,54 @@ import React from "react";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import PageComponent from "@/components/PageComponent";
-import { FormikValues, useFormik } from "formik";
+import { useFormik } from "formik";
 import Link from "next/link";
 import { signupSchema } from "@/validation/validationSchema";
+import api from "@/api";
+import { useRouter } from "next/navigation";
 
+interface MyData {
+  username: string;
+  email: string;
+  password: string;
+}
+type ResponseData = {
+  data: {
+    username: string;
+    email: string;
+    _id: string;
+    message: string;
+    error?: string;
+  };
+};
 const SignUp = () => {
-  const handleSubmit = (values: FormikValues) => {
-    console.log(values, ">>>>>");
+  const router = useRouter();
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handleSubmit = async (values: MyData) => {
+    try {
+      setLoading(true);
+      const response = await api<ResponseData>({
+        method: "POST",
+        url: "/user",
+        data: values,
+      });
+
+      if (response.data.error) {
+        formik.setErrors({ password: response.data.error });
+        setLoading(false);
+      } else {
+        alert(response.data.message);
+        router.replace("/");
+        values.email = "";
+        values.password = "";
+        values.username = "";
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      alert("Somerthing went wrong, please try again");
+    }
   };
 
   const formik = useFormik({
@@ -70,9 +111,10 @@ const SignUp = () => {
           required
         />
         <Button
-          label="Sign up now"
+          label={loading ? "Signin up..." : "Sign up now"}
           type="submit"
           className="text-white outline-none p-2 rounded-lg bg-orange-600 hover:opacity-60 opacity-70 w-full lg:w-[200px]"
+          disabled={loading}
         />
         <p className="text-white">
           Already have an account?{" "}
