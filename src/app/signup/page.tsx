@@ -38,11 +38,11 @@ const SignUp = () => {
       });
 
       if (response.data.error) {
-        alert(response.data.error);
+        formik.setErrors({ password: response.data.error });
         setLoading(false);
       } else {
         alert(response.data.message);
-        router.push("/");
+        router.replace("/");
         values.email = "";
         values.password = "";
         values.username = "";
