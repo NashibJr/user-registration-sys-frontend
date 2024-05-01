@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## THE USER REGISTRATION SYSTEM FRONEND.
 
-## Getting Started
+## Running the application.
 
-First, run the development server:
+1. clone the application in any directory of your computer by running, git clone https://github.com/NashibJr/user-registration-sys-frontend.git
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. change the directory of your computer to the application's directory
+3. install the dependencies by running, npm install
+4. start the application by running, npm run dev
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# NB
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. please make sure you have no any other react or next app running so that the application runs on http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Libraries used.
 
-## Learn More
+1. axios. This is a promise based HTTP client for node and browser. I have used axios to consume the endpoints
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. formik. This is a reactjs library that processes the submition and validation of react forms
+3. yup. Yup is a reactjs library that is used to validate react form fields
+4. yup-password. This is a reactjs libary used to validate password form fields on the frontend
