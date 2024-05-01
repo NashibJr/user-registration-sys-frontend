@@ -49,6 +49,7 @@ const Login = () => {
         values.username = "";
       }
     } catch (error) {
+      setLoading(false);
       alert("Something went wrong");
     }
   };

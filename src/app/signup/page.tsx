@@ -49,6 +49,7 @@ const SignUp = () => {
         setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       alert("Somerthing went wrong, please try again");
     }
   };

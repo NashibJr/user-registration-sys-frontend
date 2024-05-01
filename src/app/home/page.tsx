@@ -1,8 +1,37 @@
+"use client";
+
 import React from "react";
 import Button from "@/components/Button";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import api from "@/api";
+
+type LogoutResponse = {
+  data: { message: string };
+};
 
 const Home = () => {
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+      const response = await api<LogoutResponse>({
+        method: "POST",
+        url: "/user/signout",
+      });
+      if (response.data.message) {
+        alert(response.data.message);
+        setLoading(false);
+        router.replace("/");
+      }
+    } catch (error) {
+      setLoading(false);
+      alert("Something went wrong");
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center items-center mt-20 p-5">
       <div className="flex gap-1">
@@ -14,8 +43,10 @@ const Home = () => {
         application
       </p>
       <Button
-        label="Log out"
+        label={loading ? "Loading..." : "Log out"}
         className="bg-[dodgerblue] hover:opacity-80 mt-28 text-white p-2 rounded-lg"
+        disabled={loading}
+        onClick={handleLogout}
       />
     </div>
   );
